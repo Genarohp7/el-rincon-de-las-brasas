@@ -7,6 +7,9 @@ type SpecialtyItem = {
   imageSrc: string;
 };
 
+const withBase = (path: string) =>
+  `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+
 const specialties: SpecialtyItem[] = [
   {
     id: "tacos",
@@ -15,7 +18,7 @@ const specialties: SpecialtyItem[] = [
     description:
       "Opciones con carácter, bien servidas y con ese toque a la parrilla que hace que cada bocado se sienta como de la casa.",
     tag: "Favoritos del grill",
-    imageSrc: "/images/Fotosmain/tacos.webp",
+    imageSrc: withBase("/images/Fotosmain/tacos.webp"),
   },
   {
     id: "burritos",
@@ -24,7 +27,7 @@ const specialties: SpecialtyItem[] = [
     description:
       "Preparados para disfrutarse de verdad, con ingredientes que se sienten completos, abundantes y perfectos para un antojo serio.",
     tag: "Bien servidos",
-    imageSrc: "/images/Fotosmain/burrito.webp",
+    imageSrc: withBase("/images/Fotosmain/burrito.webp"),
   },
   {
     id: "specialties",
@@ -33,7 +36,7 @@ const specialties: SpecialtyItem[] = [
     description:
       "Propuestas con personalidad propia, hechas para quienes buscan algo más que lo de siempre y quieren probar sabores con identidad.",
     tag: "De la casa",
-    imageSrc: "/images/Fotosmain/cebollon.webp",
+    imageSrc: withBase("/images/Fotosmain/cebollon.webp"),
   },
   {
     id: "combos",
@@ -42,7 +45,7 @@ const specialties: SpecialtyItem[] = [
     description:
       "Pensados para disfrutar en pareja, con amigos o en familia, combinando sabor, presencia y una experiencia más completa.",
     tag: "Para compartir",
-    imageSrc: "/images/Fotosmain/parrillada.webp",
+    imageSrc: withBase("/images/Fotosmain/parrillada.webp"),
   },
 ];
 

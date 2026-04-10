@@ -6,6 +6,9 @@ type GalleryItem = {
   imageSrc: string;
 };
 
+const withBase = (path: string) =>
+  `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+
 const galleryItems: GalleryItem[] = [
   {
     id: "grill-moment",
@@ -13,7 +16,7 @@ const galleryItems: GalleryItem[] = [
     description:
       "Espacio pensado para mostrar parrilla, brasa, preparación y ese ambiente que abre el apetito desde la primera vista.",
     layout: "large",
-    imageSrc: "/images/Fotosmain/hamburguesa.webp",
+    imageSrc: withBase("/images/Fotosmain/hamburguesa.webp"),
   },
   {
     id: "signature-plating",
@@ -21,7 +24,7 @@ const galleryItems: GalleryItem[] = [
     description:
       "Aquí después podremos destacar un emplatado o un producto estrella con mejor presencia visual.",
     layout: "standard",
-    imageSrc: "/images/Fotosmain/norteño.webp",
+    imageSrc: withBase("/images/Fotosmain/norteño.webp"),
   },
   {
     id: "sharing-table",
@@ -29,7 +32,7 @@ const galleryItems: GalleryItem[] = [
     description:
       "Perfecto para futuros visuales de combos, mesas compartidas o una escena con más contexto de consumo.",
     layout: "wide",
-    imageSrc: "/images/Fotosmain/parrilla2.webp",
+    imageSrc: withBase("/images/Fotosmain/parrilla2.webp"),
   },
   {
     id: "dessert-detail",
@@ -37,7 +40,7 @@ const galleryItems: GalleryItem[] = [
     description:
       "Espacio pensado para mostrar postres, frescura, toppings y detalles más cercanos.",
     layout: "standard",
-    imageSrc: "/images/Fotosmain/fresas.webp",
+    imageSrc: withBase("/images/Fotosmain/fresas.webp"),
   },
   {
     id: "brand-atmosphere",
@@ -45,7 +48,7 @@ const galleryItems: GalleryItem[] = [
     description:
       "Zona ideal para integrar branding, fachada, detalles del local o composición gráfica premium.",
     layout: "tall",
-    imageSrc: "/images/Fotosmain/carnesalchicha.webp",
+    imageSrc: withBase("/images/Fotosmain/carnesalchicha.webp"),
   },
 ];
 

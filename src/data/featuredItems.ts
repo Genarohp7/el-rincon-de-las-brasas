@@ -7,6 +7,9 @@ type FeaturedItem = {
   imageSrc: string;
 };
 
+const withBase = (path: string) =>
+  `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+
 const featuredItems: FeaturedItem[] = [
   {
     id: "chicharron-norteno",
@@ -15,7 +18,7 @@ const featuredItems: FeaturedItem[] = [
     description:
       "Un platillo con presencia y mucho carácter. Crujiente por fuera, jugoso por dentro y con ese sabor intenso que hace que cada bocado se sienta como una verdadera especialidad de la casa.",
     badge: "Sabor con carácter",
-    imageSrc: "/images/Fotosmain/norteño.webp",
+    imageSrc: withBase("/images/Fotosmain/norteño.webp"),
   },
   {
     id: "cebollon",
@@ -24,7 +27,7 @@ const featuredItems: FeaturedItem[] = [
     description:
       "Cebolla horneada al carbón, rellena con el corte de carne de tu elección y queso fundido. Una combinación con profundidad, toque ahumado y personalidad propia.",
     badge: "Diferente y memorable",
-    imageSrc: "/images/Fotosmain/cebollon.webp",
+    imageSrc: withBase("/images/Fotosmain/cebollon.webp"),
   },
   {
     id: "fresas-con-crema",
@@ -33,7 +36,7 @@ const featuredItems: FeaturedItem[] = [
     description:
       "El cierre perfecto para equilibrar el antojo. Fresas con crema de textura suave, acompañadas con almendra quebrada y galleta para un contraste dulce, fresco y delicioso.",
     badge: "Dulce cierre",
-    imageSrc: "/images/Fotosmain/fresas.webp",
+    imageSrc: withBase("/images/Fotosmain/fresas.webp"),
   },
 ];
 

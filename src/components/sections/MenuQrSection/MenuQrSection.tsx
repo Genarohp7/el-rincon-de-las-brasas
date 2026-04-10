@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router";
-import businessInfo from "../../../data/businessInfo";
 import {
   fadeUpVariant,
   staggerContainerVariant,
@@ -48,31 +47,23 @@ function MenuQrSection() {
             <p className="menu-qr-section__eyebrow">Menú QR</p>
 
             <h2 className="menu-qr-section__title">
-              Escanea y abre el menú al instante
+              Compártelo 
             </h2>
 
-            <p className="menu-qr-section__description">
-              Este código QR está ligado a la ruta del menú para que también
-              pueda usarse en mesas, impresos, mostrador o material promocional
-              sin depender de archivos sueltos o links improvisados.
-            </p>
+          
+
+            <div className="menu-qr-section__meta">
+             
+              <span className="menu-qr-section__pill">Abre directo al menú</span>
+            </div>
 
             <div className="menu-qr-section__actions">
               <Link
                 className="menu-qr-section__button menu-qr-section__button--secondary"
                 to="/menu"
               >
-                Ver menú
+                Abrir menú
               </Link>
-
-              <a
-                className="menu-qr-section__button menu-qr-section__button--primary"
-                href={businessInfo.whatsappHref}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Pedir por WhatsApp
-              </a>
             </div>
           </motion.div>
 
@@ -105,7 +96,7 @@ function MenuQrSection() {
               target="_blank"
               rel="noreferrer"
             >
-              {menuUrl || "Abrir menú"}
+              Abrir enlace del menú
             </a>
           </motion.div>
         </motion.div>

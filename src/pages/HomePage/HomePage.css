@@ -27,9 +27,8 @@
       rgba(214, 69, 43, 0.26) 0%,
       rgba(214, 69, 43, 0) 42%
     ),
-    linear-gradient(135deg, #1c0905 0%, #2d0d07 48%, #140805 100%);
+    url("/images/Fotosmain/parrilla2.webp") center / cover no-repeat;
 }
-
 .home-page__hero-overlay {
   position: absolute;
   inset: 0;

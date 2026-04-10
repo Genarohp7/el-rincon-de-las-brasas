@@ -60,20 +60,21 @@
   align-items: flex-end;
   min-height: 260px;
   padding: 20px;
-  background:
-    radial-gradient(
-      circle at top,
-      rgba(214, 69, 43, 0.22) 0%,
-      rgba(214, 69, 43, 0) 42%
-    ),
-    linear-gradient(135deg, #2a0c06 0%, #190905 100%);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .featured-items-section__visual::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image:
+  background:
+    linear-gradient(
+      180deg,
+      rgba(20, 8, 5, 0.12) 0%,
+      rgba(20, 8, 5, 0.72) 100%
+    ),
     linear-gradient(
       90deg,
       rgba(255, 255, 255, 0.025) 1px,
@@ -84,8 +85,8 @@
       rgba(255, 255, 255, 0.02) 1px,
       transparent 1px
     );
-  background-size: 28px 28px;
-  opacity: 0.14;
+  background-size: auto, 28px 28px, 28px 28px;
+  opacity: 1;
   pointer-events: none;
 }
 

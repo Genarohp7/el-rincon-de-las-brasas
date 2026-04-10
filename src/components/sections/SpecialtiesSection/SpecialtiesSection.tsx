@@ -56,11 +56,14 @@ function SpecialtiesSection() {
               key={specialty.id}
               variants={fadeUpVariant}
             >
-              <div className="specialties-section__visual">
-                <div className="specialties-section__visual-badge">
-                  Imagen disponible pronto
-                </div>
-              </div>
+              <div
+  className="specialties-section__visual"
+  style={{ backgroundImage: `url(${specialty.imageSrc})` }}
+>
+  <div className="specialties-section__visual-badge">
+    {specialty.eyebrow}
+  </div>
+</div>
 
               <div className="specialties-section__content">
                 <p className="specialties-section__card-eyebrow">

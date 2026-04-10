@@ -44,23 +44,22 @@ function GallerySection() {
           viewport={{ once: true, amount: 0.15 }}
         >
           {galleryItems.map((item) => (
-            <motion.article
-              className={`gallery-section__card gallery-section__card--${item.layout}`}
-              key={item.id}
-              variants={fadeUpVariant}
-            >
-              <div className="gallery-section__card-overlay" />
+           <motion.article
+  className={`gallery-section__card gallery-section__card--${item.layout}`}
+  key={item.id}
+  variants={fadeUpVariant}
+  style={{ backgroundImage: `url(${item.imageSrc})` }}
+>
+  <div className="gallery-section__card-overlay" />
 
-              <div className="gallery-section__card-content">
-                <span className="gallery-section__card-badge">
-                  Foto disponible pronto
-                </span>
+  <div className="gallery-section__card-content">
+    <span className="gallery-section__card-badge">{item.title}</span>
 
-                <h3 className="gallery-section__card-title">{item.title}</h3>
+    <h3 className="gallery-section__card-title">{item.title}</h3>
 
-                <p className="gallery-section__card-text">{item.description}</p>
-              </div>
-            </motion.article>
+    <p className="gallery-section__card-text">{item.description}</p>
+  </div>
+</motion.article>
           ))}
         </motion.div>
 

@@ -55,11 +55,14 @@ function FeaturedItemsSection() {
               key={item.id}
               variants={fadeUpVariant}
             >
-              <div className="featured-items-section__visual">
-                <div className="featured-items-section__visual-badge">
-                  Foto disponible pronto
-                </div>
-              </div>
+              <div
+  className="featured-items-section__visual"
+  style={{ backgroundImage: `url(${item.imageSrc})` }}
+>
+  <div className="featured-items-section__visual-badge">
+    {item.eyebrow}
+  </div>
+</div>
 
               <div className="featured-items-section__content">
                 <p className="featured-items-section__card-eyebrow">

@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { Link } from "react-router";
 import FeaturedItemsSection from "../../components/sections/FeaturedItemsSection/FeaturedItemsSection";
+import GallerySection from "../../components/sections/GallerySection/GallerySection";
 import LocationSection from "../../components/sections/LocationSection/LocationSection";
 import SpecialtiesSection from "../../components/sections/SpecialtiesSection/SpecialtiesSection";
 import Footer from "../../components/layout/Footer/Footer";
@@ -123,6 +124,7 @@ function HomePage() {
 
         <SpecialtiesSection />
         <FeaturedItemsSection />
+        <GallerySection />
         <LocationSection />
       </main>
 

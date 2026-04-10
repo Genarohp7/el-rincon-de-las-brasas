@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import FeaturedItemsSection from "../../components/sections/FeaturedItemsSection/FeaturedItemsSection";
 import GallerySection from "../../components/sections/GallerySection/GallerySection";
 import LocationSection from "../../components/sections/LocationSection/LocationSection";
+import MenuQrSection from "../../components/sections/MenuQrSection/MenuQrSection";
 import SpecialtiesSection from "../../components/sections/SpecialtiesSection/SpecialtiesSection";
 import Footer from "../../components/layout/Footer/Footer";
 import Header from "../../components/layout/Header/Header";
@@ -125,6 +126,7 @@ function HomePage() {
         <SpecialtiesSection />
         <FeaturedItemsSection />
         <GallerySection />
+        <MenuQrSection />
         <LocationSection />
       </main>
 

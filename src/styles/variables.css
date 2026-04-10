@@ -1,0 +1,18 @@
+:root {
+  --color-background: #140805;
+  --color-surface: #22100a;
+  --color-surface-soft: #2b140d;
+  --color-brand-primary: #d6452b;
+  --color-brand-primary-hover: #eb5537;
+  --color-accent: #f2d21b;
+  --color-text-primary: #f2d7b5;
+  --color-text-muted: #d7b08a;
+  --color-border-soft: rgba(242, 215, 181, 0.12);
+
+  --font-family-base: "Inter", Arial, Helvetica, sans-serif;
+  --font-family-display: "Anton", Impact, Haettenschweiler, "Arial Narrow Bold",
+    sans-serif;
+
+  --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.22);
+  --container-width: 1120px;
+}

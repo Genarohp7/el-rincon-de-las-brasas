@@ -4,6 +4,7 @@ import Footer from "../../components/layout/Footer/Footer";
 import Header from "../../components/layout/Header/Header";
 import MobileStickyBar from "../../components/layout/MobileStickyBar/MobileStickyBar";
 import businessInfo from "../../data/businessInfo";
+import menuSections from "../../data/menuSections";
 import {
   fadeUpVariant,
   staggerContainerVariant,
@@ -36,8 +37,18 @@ function MenuPage() {
               variants={fadeUpVariant}
             >
               Esta es una versión inicial para presentar el concepto del
-              proyecto. Después integraremos el menú real del restaurante.
+              proyecto. Después integraremos el menú real del restaurante con
+              sus productos, precios y fotografías definitivas.
             </motion.p>
+
+            <motion.div
+              className="menu-page__badges"
+              variants={fadeUpVariant}
+            >
+              <span className="menu-page__badge">Versión demo</span>
+              <span className="menu-page__badge">Preparado al momento</span>
+              <span className="menu-page__badge">Pedido por WhatsApp</span>
+            </motion.div>
 
             <motion.div
               className="menu-page__actions"
@@ -68,57 +79,92 @@ function MenuPage() {
             variants={staggerContainerVariant}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.15 }}
           >
-            <motion.h2
-              className="menu-page__section-title"
+            <motion.div
+              className="menu-page__section-header"
               variants={fadeUpVariant}
             >
-              Categorías demo
-            </motion.h2>
+              <p className="menu-page__section-eyebrow">Selección inicial</p>
+              <h2 className="menu-page__section-title">Categorías demo</h2>
+              <p className="menu-page__section-description">
+                Una primera estructura pensada para mostrar el estilo del menú y
+                cómo se presentará la oferta del negocio cuando integremos la
+                versión final.
+              </p>
+            </motion.div>
 
             <div className="menu-page__grid">
-              <motion.article
-                className="menu-page__card"
-                variants={fadeUpVariant}
-              >
-                <h3 className="menu-page__card-title">Tacos</h3>
-                <p className="menu-page__card-text">
-                  Taco al grill, taco especial de la casa, taco norteño.
-                </p>
-              </motion.article>
+              {menuSections.map((section) => (
+                <motion.article
+                  className="menu-page__card"
+                  key={section.id}
+                  variants={fadeUpVariant}
+                >
+                  <div className="menu-page__card-head">
+                    <p className="menu-page__card-eyebrow">
+                      {section.eyebrow}
+                    </p>
+                    <h3 className="menu-page__card-title">{section.title}</h3>
+                  </div>
 
-              <motion.article
-                className="menu-page__card"
-                variants={fadeUpVariant}
-              >
-                <h3 className="menu-page__card-title">Burritos y pepitos</h3>
-                <p className="menu-page__card-text">
-                  Burrito clásico, burrito especial, pepito al grill.
-                </p>
-              </motion.article>
+                  <p className="menu-page__card-text">
+                    {section.description}
+                  </p>
 
-              <motion.article
-                className="menu-page__card"
-                variants={fadeUpVariant}
-              >
-                <h3 className="menu-page__card-title">
-                  Especialidades de la casa
-                </h3>
-                <p className="menu-page__card-text">
-                  Chicharrón Norteño, Cebollón y especialidad para compartir.
-                </p>
-              </motion.article>
+                  <div className="menu-page__item-list">
+                    {section.items.map((item) => (
+                      <span className="menu-page__item-pill" key={item}>
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          </motion.div>
+        </section>
 
-              <motion.article
-                className="menu-page__card"
-                variants={fadeUpVariant}
-              >
-                <h3 className="menu-page__card-title">Postres</h3>
-                <p className="menu-page__card-text">
-                  Fresas con crema y opciones dulces para cerrar con buen sabor.
+        <section className="menu-page__cta-section">
+          <motion.div
+            className="menu-page__container"
+            variants={fadeUpVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.25 }}
+          >
+            <div className="menu-page__cta-card">
+              <div className="menu-page__cta-content">
+                <p className="menu-page__cta-eyebrow">Pide directo</p>
+                <h2 className="menu-page__cta-title">
+                  ¿Listo para pedir o preguntar?
+                </h2>
+                <p className="menu-page__cta-text">
+                  Escríbenos por WhatsApp para hacer tu pedido, preguntar por la
+                  promoción del momento o conocer más sobre nuestras
+                  especialidades.
                 </p>
-              </motion.article>
+              </div>
+
+              <div className="menu-page__cta-actions">
+                <a
+                  className="menu-page__button menu-page__button--primary"
+                  href={businessInfo.whatsappHref}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Pedir por WhatsApp
+                </a>
+
+                <a
+                  className="menu-page__button menu-page__button--secondary"
+                  href={businessInfo.mapsHref}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Ver ubicación
+                </a>
+              </div>
             </div>
           </motion.div>
         </section>

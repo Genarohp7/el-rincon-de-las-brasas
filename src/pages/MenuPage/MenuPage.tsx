@@ -1,10 +1,12 @@
 import { motion } from "motion/react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router";
 import Footer from "../../components/layout/Footer/Footer";
 import Header from "../../components/layout/Header/Header";
 import MobileStickyBar from "../../components/layout/MobileStickyBar/MobileStickyBar";
 import businessInfo from "../../data/businessInfo";
 import menuSections from "../../data/menuSections";
+import seoConfig from "../../data/seo";
 import {
   fadeUpVariant,
   staggerContainerVariant,
@@ -12,8 +14,34 @@ import {
 import "./MenuPage.css";
 
 function MenuPage() {
+  const canonicalUrl = `${seoConfig.siteUrl}/menu`;
+  const pageTitle = "Menú | El Rincón de las Brasas";
+  const pageDescription =
+    "Consulta el menú de El Rincón de las Brasas: tacos, burritos, especialidades de la casa y opciones para compartir en Lomas de Atizapán.";
+
   return (
     <>
+      <Helmet>
+        <html lang="es-MX" />
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href={canonicalUrl} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content={seoConfig.locale} />
+        <meta property="og:site_name" content={seoConfig.siteName} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={seoConfig.defaultImage} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        <meta name="twitter:image" content={seoConfig.defaultImage} />
+      </Helmet>
+
       <Header currentPage="menu" />
 
       <main className="menu-page">

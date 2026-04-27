@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://genarohp7.github.io/el-rincon-de-las-brasas/sitemap.xml
+Sitemap: https://elrincondelasbrasas.com.mx/sitemap.xml

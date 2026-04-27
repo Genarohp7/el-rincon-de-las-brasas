@@ -1,0 +1,76 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Fuerza HTTPS y versión canónica sin www
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} ^www\.elrincondelasbrasas\.com\.mx$ [NC]
+  RewriteRule ^ https://elrincondelasbrasas.com.mx%{REQUEST_URI} [R=301,L]
+
+  # Permite validaciones tipo SSL/Let's Encrypt
+  RewriteRule ^\.well-known/ - [L]
+
+  # Si el recurso existe físicamente, sírvelo normal
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Fallback para React Router / SPA
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Seguridad básica
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+  # Activa HSTS solo si el dominio ya funciona correctamente por HTTPS
+  Header always set Strict-Transport-Security "max-age=31536000"
+
+  # Cache-control para estáticos
+  <FilesMatch "\.(js|css|png|jpg|jpeg|gif|webp|svg|woff|woff2|ico|pdf)$">
+    Header set Cache-Control "public, max-age=2592000, immutable"
+  </FilesMatch>
+
+  # HTML siempre fresco
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml text/javascript application/javascript application/x-javascript application/json application/xml image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # HTML: no cache largo
+  ExpiresByType text/html "access plus 0 seconds"
+
+  # CSS / JS
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType application/x-javascript "access plus 1 month"
+
+  # Imágenes
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/gif "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 month"
+
+  # Fuentes
+  ExpiresByType font/woff "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 month"
+
+  # PDFs
+  ExpiresByType application/pdf "access plus 1 month"
+</IfModule>
+
+FileETag None

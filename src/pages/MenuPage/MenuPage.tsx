@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router";
 import Footer from "../../components/layout/Footer/Footer";
@@ -16,6 +16,10 @@ function MenuPage() {
     "Consulta el menú completo de El Rincón de las Brasas: tacos, burritos, cortes, parrilladas, hamburguesas, hot-dogs, ramen, bebidas y más.";
 
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const categoryNavRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,6 +46,47 @@ function MenuPage() {
   const handleScrollTop = () => {
     window.scrollTo({
       top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    const navElement = categoryNavRef.current;
+
+    if (!navElement) {
+      return;
+    }
+
+    const updateScrollState = () => {
+      const { scrollLeft, scrollWidth, clientWidth } = navElement;
+      const maxScrollLeft = scrollWidth - clientWidth;
+
+      setCanScrollLeft(scrollLeft > 4);
+      setCanScrollRight(scrollLeft < maxScrollLeft - 4);
+    };
+
+    updateScrollState();
+
+    navElement.addEventListener("scroll", updateScrollState);
+    window.addEventListener("resize", updateScrollState);
+
+    return () => {
+      navElement.removeEventListener("scroll", updateScrollState);
+      window.removeEventListener("resize", updateScrollState);
+    };
+  }, []);
+
+  const handleCategoryScroll = (direction: "left" | "right") => {
+    const navElement = categoryNavRef.current;
+
+    if (!navElement) {
+      return;
+    }
+
+    const scrollAmount = 320;
+
+    navElement.scrollBy({
+      left: direction === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth",
     });
   };
@@ -84,11 +129,6 @@ function MenuPage() {
               hot-dogs, ramen, snacks y bebidas.
             </p>
 
-            <div className="menu-page__badges">
-              <span className="menu-page__badge">Precios en MXN</span>
-              <span className="menu-page__badge">Pedido por WhatsApp</span>
-              <span className="menu-page__badge">Menú digital</span>
-            </div>
 
             <div className="menu-page__actions">
               <a
@@ -112,16 +152,44 @@ function MenuPage() {
 
         <section className="menu-page__category-nav-section">
           <div className="menu-page__container">
-            <div className="menu-page__category-nav">
-              {categoryLinks.map((category) => (
-                <a
-                  key={category.id}
-                  className="menu-page__category-link"
-                  href={`#${category.id}`}
-                >
-                  {category.label}
-                </a>
-              ))}
+            <div className="menu-page__category-nav-shell">
+              <button
+                className={`menu-page__category-arrow menu-page__category-arrow--left ${
+                  canScrollLeft ? "menu-page__category-arrow--active" : ""
+                }`}
+                type="button"
+                aria-label="Desplazar categorías a la izquierda"
+                onClick={() => handleCategoryScroll("left")}
+                disabled={!canScrollLeft}
+              >
+                ‹
+              </button>
+
+              <div className="menu-page__category-nav-wrap">
+                <div className="menu-page__category-nav" ref={categoryNavRef}>
+                  {categoryLinks.map((category) => (
+                    <a
+                      key={category.id}
+                      className="menu-page__category-link"
+                      href={`#${category.id}`}
+                    >
+                      {category.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <button
+                className={`menu-page__category-arrow menu-page__category-arrow--right ${
+                  canScrollRight ? "menu-page__category-arrow--active" : ""
+                }`}
+                type="button"
+                aria-label="Desplazar categorías a la derecha"
+                onClick={() => handleCategoryScroll("right")}
+                disabled={!canScrollRight}
+              >
+                ›
+              </button>
             </div>
           </div>
         </section>

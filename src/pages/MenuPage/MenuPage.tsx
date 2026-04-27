@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router";
 import Footer from "../../components/layout/Footer/Footer";
@@ -7,10 +7,6 @@ import MobileStickyBar from "../../components/layout/MobileStickyBar/MobileStick
 import businessInfo from "../../data/businessInfo";
 import menuSections from "../../data/menuSections";
 import seoConfig from "../../data/seo";
-import {
-  fadeUpVariant,
-  staggerContainerVariant,
-} from "../../utils/motion";
 import "./MenuPage.css";
 
 function MenuPage() {
@@ -18,6 +14,37 @@ function MenuPage() {
   const pageTitle = "Menú | El Rincón de las Brasas";
   const pageDescription =
     "Consulta el menú completo de El Rincón de las Brasas: tacos, burritos, cortes, parrilladas, hamburguesas, hot-dogs, ramen, bebidas y más.";
+
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 700);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const categoryLinks = useMemo(
+    () =>
+      menuSections.map((section) => ({
+        id: section.id,
+        label: section.title,
+      })),
+    []
+  );
+
+  const handleScrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <>
@@ -46,42 +73,24 @@ function MenuPage() {
 
       <main className="menu-page">
         <section className="menu-page__hero">
-          <motion.div
-            className="menu-page__container"
-            variants={staggerContainerVariant}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.p className="menu-page__eyebrow" variants={fadeUpVariant}>
-              Menú digital
-            </motion.p>
+          <div className="menu-page__container">
+            <p className="menu-page__eyebrow">Menú digital</p>
 
-            <motion.h1 className="menu-page__title" variants={fadeUpVariant}>
-              Todo el sabor, en un solo lugar
-            </motion.h1>
+            <h1 className="menu-page__title">Todo el sabor, en un solo lugar</h1>
 
-            <motion.p
-              className="menu-page__description"
-              variants={fadeUpVariant}
-            >
+            <p className="menu-page__description">
               Consulta el menú completo de El Rincón de las Brasas y encuentra
               desde tacos y burritos hasta cortes, parrilladas, hamburguesas,
               hot-dogs, ramen, snacks y bebidas.
-            </motion.p>
+            </p>
 
-            <motion.div
-              className="menu-page__badges"
-              variants={fadeUpVariant}
-            >
+            <div className="menu-page__badges">
               <span className="menu-page__badge">Precios en MXN</span>
               <span className="menu-page__badge">Pedido por WhatsApp</span>
               <span className="menu-page__badge">Menú digital</span>
-            </motion.div>
+            </div>
 
-            <motion.div
-              className="menu-page__actions"
-              variants={fadeUpVariant}
-            >
+            <div className="menu-page__actions">
               <a
                 className="menu-page__button menu-page__button--primary"
                 href={businessInfo.whatsappHref}
@@ -97,38 +106,45 @@ function MenuPage() {
               >
                 Volver al inicio
               </Link>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
+        </section>
+
+        <section className="menu-page__category-nav-section">
+          <div className="menu-page__container">
+            <div className="menu-page__category-nav">
+              {categoryLinks.map((category) => (
+                <a
+                  key={category.id}
+                  className="menu-page__category-link"
+                  href={`#${category.id}`}
+                >
+                  {category.label}
+                </a>
+              ))}
+            </div>
+          </div>
         </section>
 
         <section className="menu-page__section">
-          <motion.div
-            className="menu-page__container"
-            variants={staggerContainerVariant}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-          >
-            <motion.div
-              className="menu-page__section-header"
-              variants={fadeUpVariant}
-            >
+          <div className="menu-page__container">
+            <div className="menu-page__section-header">
               <p className="menu-page__section-eyebrow">Menú completo</p>
               <h2 className="menu-page__section-title">
                 Explora todas las categorías
               </h2>
               <p className="menu-page__section-description">
-                Este menú digital reúne la oferta actual del restaurante en un
-                formato claro, navegable y pensado para verse bien en celular.
+                Usa la barra de navegación para saltar directo a la sección que
+                te interesa y encontrar más fácil lo que buscas.
               </p>
-            </motion.div>
+            </div>
 
             <div className="menu-page__grid">
               {menuSections.map((section) => (
-                <motion.article
+                <article
                   className="menu-page__card"
+                  id={section.id}
                   key={section.id}
-                  variants={fadeUpVariant}
                 >
                   <div className="menu-page__card-head">
                     <p className="menu-page__card-eyebrow">
@@ -143,7 +159,10 @@ function MenuPage() {
 
                   <div className="menu-page__item-list">
                     {section.items.map((item) => (
-                      <div className="menu-page__item-row" key={`${section.id}-${item.name}`}>
+                      <div
+                        className="menu-page__item-row"
+                        key={`${section.id}-${item.name}`}
+                      >
                         <div className="menu-page__item-copy">
                           <p className="menu-page__item-name">{item.name}</p>
                           {item.description ? (
@@ -161,20 +180,14 @@ function MenuPage() {
                       </div>
                     ))}
                   </div>
-                </motion.article>
+                </article>
               ))}
             </div>
-          </motion.div>
+          </div>
         </section>
 
         <section className="menu-page__cta-section">
-          <motion.div
-            className="menu-page__container"
-            variants={fadeUpVariant}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.25 }}
-          >
+          <div className="menu-page__container">
             <div className="menu-page__cta-card">
               <div className="menu-page__cta-content">
                 <p className="menu-page__cta-eyebrow">Pide directo</p>
@@ -207,8 +220,19 @@ function MenuPage() {
                 </a>
               </div>
             </div>
-          </motion.div>
+          </div>
         </section>
+
+        <button
+          className={`menu-page__scroll-top ${
+            showScrollTop ? "menu-page__scroll-top--visible" : ""
+          }`}
+          type="button"
+          aria-label="Volver arriba"
+          onClick={handleScrollTop}
+        >
+          ↑
+        </button>
       </main>
 
       <Footer />

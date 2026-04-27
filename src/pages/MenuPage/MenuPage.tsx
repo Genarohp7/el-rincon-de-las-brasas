@@ -17,7 +17,7 @@ function MenuPage() {
   const canonicalUrl = `${seoConfig.siteUrl}/menu`;
   const pageTitle = "Menú | El Rincón de las Brasas";
   const pageDescription =
-    "Consulta el menú de El Rincón de las Brasas: tacos, burritos, especialidades de la casa y opciones para compartir en Lomas de Atizapán.";
+    "Consulta el menú completo de El Rincón de las Brasas: tacos, burritos, cortes, parrilladas, hamburguesas, hot-dogs, ramen, bebidas y más.";
 
   return (
     <>
@@ -53,29 +53,29 @@ function MenuPage() {
             animate="visible"
           >
             <motion.p className="menu-page__eyebrow" variants={fadeUpVariant}>
-              Menú
+              Menú digital
             </motion.p>
 
             <motion.h1 className="menu-page__title" variants={fadeUpVariant}>
-              Nuestro menú
+              Todo el sabor, en un solo lugar
             </motion.h1>
 
             <motion.p
               className="menu-page__description"
               variants={fadeUpVariant}
             >
-              Esta es una versión inicial para presentar el concepto del
-              proyecto. Después integraremos el menú real del restaurante con
-              sus productos, precios y fotografías definitivas.
+              Consulta el menú completo de El Rincón de las Brasas y encuentra
+              desde tacos y burritos hasta cortes, parrilladas, hamburguesas,
+              hot-dogs, ramen, snacks y bebidas.
             </motion.p>
 
             <motion.div
               className="menu-page__badges"
               variants={fadeUpVariant}
             >
-              <span className="menu-page__badge">Versión demo</span>
-              <span className="menu-page__badge">Preparado al momento</span>
+              <span className="menu-page__badge">Precios en MXN</span>
               <span className="menu-page__badge">Pedido por WhatsApp</span>
+              <span className="menu-page__badge">Menú digital</span>
             </motion.div>
 
             <motion.div
@@ -107,18 +107,19 @@ function MenuPage() {
             variants={staggerContainerVariant}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
+            viewport={{ once: true, amount: 0.1 }}
           >
             <motion.div
               className="menu-page__section-header"
               variants={fadeUpVariant}
             >
-              <p className="menu-page__section-eyebrow">Selección inicial</p>
-              <h2 className="menu-page__section-title">Categorías demo</h2>
+              <p className="menu-page__section-eyebrow">Menú completo</p>
+              <h2 className="menu-page__section-title">
+                Explora todas las categorías
+              </h2>
               <p className="menu-page__section-description">
-                Una primera estructura pensada para mostrar el estilo del menú y
-                cómo se presentará la oferta del negocio cuando integremos la
-                versión final.
+                Este menú digital reúne la oferta actual del restaurante en un
+                formato claro, navegable y pensado para verse bien en celular.
               </p>
             </motion.div>
 
@@ -136,15 +137,28 @@ function MenuPage() {
                     <h3 className="menu-page__card-title">{section.title}</h3>
                   </div>
 
-                  <p className="menu-page__card-text">
-                    {section.description}
-                  </p>
+                  {section.note ? (
+                    <p className="menu-page__card-note">{section.note}</p>
+                  ) : null}
 
                   <div className="menu-page__item-list">
                     {section.items.map((item) => (
-                      <span className="menu-page__item-pill" key={item}>
-                        {item}
-                      </span>
+                      <div className="menu-page__item-row" key={`${section.id}-${item.name}`}>
+                        <div className="menu-page__item-copy">
+                          <p className="menu-page__item-name">{item.name}</p>
+                          {item.description ? (
+                            <p className="menu-page__item-description">
+                              {item.description}
+                            </p>
+                          ) : null}
+                        </div>
+
+                        {item.price ? (
+                          <span className="menu-page__item-price">
+                            {item.price}
+                          </span>
+                        ) : null}
+                      </div>
                     ))}
                   </div>
                 </motion.article>
@@ -168,9 +182,8 @@ function MenuPage() {
                   ¿Listo para pedir o preguntar?
                 </h2>
                 <p className="menu-page__cta-text">
-                  Escríbenos por WhatsApp para hacer tu pedido, preguntar por la
-                  promoción del momento o conocer más sobre nuestras
-                  especialidades.
+                  Escríbenos por WhatsApp para hacer tu pedido, preguntar por
+                  disponibilidad o elegir la mejor opción para compartir.
                 </p>
               </div>
 

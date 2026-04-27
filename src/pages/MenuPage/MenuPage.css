@@ -180,29 +180,53 @@
   line-height: 0.95;
 }
 
-.menu-page__card-text,
-.menu-page__cta-text {
-  line-height: 1.8;
+.menu-page__card-note {
+  line-height: 1.75;
   color: var(--color-text-muted);
+  font-size: 0.94rem;
 }
 
 .menu-page__item-list {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.menu-page__item-pill {
-  display: inline-flex;
-  align-items: center;
-  min-height: 38px;
-  padding: 0 14px;
-  border: 1px solid rgba(242, 215, 181, 0.12);
-  border-radius: 999px;
-  background-color: rgba(255, 255, 255, 0.04);
-  color: var(--color-text-primary);
-  font-size: 0.88rem;
-  font-weight: 600;
+.menu-page__item-row {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 16px;
+  border-top: 1px solid rgba(242, 215, 181, 0.08);
+}
+
+.menu-page__item-row:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.menu-page__item-copy {
+  flex: 1;
+}
+
+.menu-page__item-name {
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.menu-page__item-description {
+  margin-top: 6px;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  font-size: 0.94rem;
+}
+
+.menu-page__item-price {
+  flex-shrink: 0;
+  margin-left: 12px;
+  font-weight: 700;
+  color: var(--color-accent);
 }
 
 .menu-page__cta-section {
@@ -237,6 +261,11 @@
   line-height: 0.95;
 }
 
+.menu-page__cta-text {
+  line-height: 1.8;
+  color: var(--color-text-muted);
+}
+
 @media (max-width: 980px) {
   .menu-page__grid {
     grid-template-columns: 1fr;
@@ -260,6 +289,15 @@
 
   .menu-page__button {
     width: 100%;
+  }
+
+  .menu-page__item-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .menu-page__item-price {
+    margin-left: 0;
   }
 }
 
